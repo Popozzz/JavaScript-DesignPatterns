@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Hello Test</title>
+    </head>
+    <body>
+      <script type="text/javascript">
+        function inheritObject(o) {
+          function F() {};
+          F.prototype = o;
+          return new F();
+        }
+
+        var father = {
+          name: 'Father',
+          list: []
+        }
+
+        var son = inheritObject(father);
+
+        son.list.push('son');
+
+        console.log('father', father, 'son', son);
+
+        /*
+        * 缺点：
+        * 跟类式继承一样父类的个有属性会变成子类的公用属性，
+        * 和类式继承的一次性不同，
+        * 子类对这些引用属性操作会影响到父类的个有数据，
+        * 因为这里仅仅是原对象的引用而不是一个新对象的引用
+        */
+      </script>
+    </body>
+  </html>

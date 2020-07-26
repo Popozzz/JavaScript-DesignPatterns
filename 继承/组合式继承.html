@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Hello Test</title>
+    </head>
+    <body>
+      <script type="text/javascript">
+        function Father(name) {
+          this.name = name;
+        }
+        Father.prototype.getFatherName = function() {
+          console.log('getFatherName:', this.name);
+          return this.name;
+        }
+
+        function Son(name) {
+          Father.call(this, name);
+        }
+
+        Son.prototype = new Father();
+        Son.prototype.getSonName = function() {
+          console.log('getSonName:', this.name);
+          return this.name;
+        }
+
+        /*
+        * 优点：
+        * 弥补类式继承和构造函数继承的缺点
+        * 缺点：
+        * 父类构造函数调用了两遍
+        */
+      </script>
+    </body>
+  </html>

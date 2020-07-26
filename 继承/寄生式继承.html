@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Hello Test</title>
+    </head>
+    <body>
+      <script type="text/javascript">
+        function inheritObject(o) {
+          function F() {};
+          F.prototype = o;
+          return new F();
+        }
+
+        function createObject(obj) {
+          var son = new inheritObject(obj);
+          son.getSonName = function() {
+            return this.name;
+          }
+
+          return son;
+        }
+
+        var father = {
+          name: 'Father',
+          list: []
+        }
+
+        var son = createObject(father);
+        son.list.push('son');
+
+        console.log('father', father, 'son', son);
+
+        /*
+        * 缺点：
+        * 缺点跟原型式继承是一样的，
+        * 只不过这里加了一层做中间处理看起来会比原型式继承灵活一点
+        */
+      </script>
+    </body>
+  </html>

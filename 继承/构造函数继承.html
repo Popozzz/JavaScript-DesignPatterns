@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Hello Test</title>
+    </head>
+    <body>
+      <script type="text/javascript">
+        function Father(name) {
+          this.name = name;
+        }
+        Father.prototype.getFatherName = function() {
+          console.log('getFatherName:', this.name);
+          return this.name;
+        }
+
+        function Son(name) {
+          Father.call(this, name);
+        }
+        Son.prototype.getSonName = function() {
+          console.log('getSonName:', this.name);
+          return this.name;
+        }
+
+        /*
+        * 缺点：
+        * 不涉及原型继承，
+        * 所以子类不会继承父类的公用方法，
+        * 而是仅仅执行了父类的构造方法，
+        * “继承”了父类的个有数据（复制了一份数据，给this绑定属性）
+        */
+      </script>
+    </body>
+  </html>

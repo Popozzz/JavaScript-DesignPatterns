@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>Hello Test</title>
+    </head>
+    <body>
+      <script type="text/javascript">
+        function inheritObject(o) {
+          function F() {};
+          F.prototype = o;
+          return new F();
+        }
+
+        function inheritPrototype(son, father) {
+          var p = inheritObject(father.prototype); // 不带父类个有属性的继承
+          p.constructor = son;
+          son.prototype = p;
+        }
+
+        function Father(name) {
+          this.name = name;
+        }
+        Father.prototype.getFatherName = function() {
+          console.log('getFatherName:', this.name);
+          return this.name;
+        }
+
+        function Son(name) {
+          Father.call(this, name);
+        }
+
+        inheritPrototype(Son, Father);
+        Son.prototype.getSonName = function() {
+          console.log('getSonName:', this.name);
+          return this.name;
+        }
+
+        /*
+        * 优点：
+        * Father.call弥补了类型继承父类个有属性无法被私有化的缺点，
+        * inheritPrototype弥补了构造函数无法继承父类公用属性的缺点
+        */
+      </script>
+    </body>
+  </html>
